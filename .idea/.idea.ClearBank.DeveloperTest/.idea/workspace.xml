@@ -8,7 +8,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="03960d9f-edf4-4ce4-a194-449af4281080" name="Changes" comment="" />
+    <list default="true" id="03960d9f-edf4-4ce4-a194-449af4281080" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/ClearBank.DeveloperTest.SampleApi/ClearBank.DeveloperTest.SampleApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ClearBank.DeveloperTest.SampleApi/ClearBank.DeveloperTest.SampleApi.csproj" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,6 +83,7 @@
       <option name="presentableId" value="Default" />
       <updated>1657725663466</updated>
       <workItem from="1657725699666" duration="6609000" />
+      <workItem from="1657732649784" duration="250000" />
     </task>
     <servers />
   </component>
