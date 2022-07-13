@@ -14,29 +14,26 @@ namespace ClearBank.DeveloperTest.Services
 
         public MakePaymentResult MakePayment(MakePaymentRequest request)
         {
-            var account = _accountDataStore.GetAccount(request.DebtorAccountNumber);
-
             var result = new MakePaymentResult { Success = true };
+
+            var account = _accountDataStore.GetAccount(request.DebtorAccountNumber);
+            if (account == null)
+            {
+                result.Success = false;
+                return result;
+            }
 
             switch (request.PaymentScheme)
             {
                 case PaymentScheme.Bacs:
-                    if (account == null)
-                    {
-                        result.Success = false;
-                    }
-                    else if (!account.AllowedPaymentSchemes.HasFlag(AllowedPaymentSchemes.Bacs))
+                    if (!account.AllowedPaymentSchemes.HasFlag(AllowedPaymentSchemes.Bacs))
                     {
                         result.Success = false;
                     }
                     break;
 
                 case PaymentScheme.FasterPayments:
-                    if (account == null)
-                    {
-                        result.Success = false;
-                    }
-                    else if (!account.AllowedPaymentSchemes.HasFlag(AllowedPaymentSchemes.FasterPayments))
+                    if (!account.AllowedPaymentSchemes.HasFlag(AllowedPaymentSchemes.FasterPayments))
                     {
                         result.Success = false;
                     }
@@ -47,11 +44,7 @@ namespace ClearBank.DeveloperTest.Services
                     break;
 
                 case PaymentScheme.Chaps:
-                    if (account == null)
-                    {
-                        result.Success = false;
-                    }
-                    else if (!account.AllowedPaymentSchemes.HasFlag(AllowedPaymentSchemes.Chaps))
+                    if (!account.AllowedPaymentSchemes.HasFlag(AllowedPaymentSchemes.Chaps))
                     {
                         result.Success = false;
                     }
