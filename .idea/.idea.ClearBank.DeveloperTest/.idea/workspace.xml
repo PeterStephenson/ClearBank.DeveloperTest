@@ -8,9 +8,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="03960d9f-edf4-4ce4-a194-449af4281080" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/ClearBank.DeveloperTest/Services/PaymentService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClearBank.DeveloperTest/Services/PaymentService.cs" afterDir="false" />
-    </list>
+    <list default="true" id="03960d9f-edf4-4ce4-a194-449af4281080" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,7 +80,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1657725663466</updated>
-      <workItem from="1657725699666" duration="6449000" />
+      <workItem from="1657725699666" duration="6609000" />
     </task>
     <servers />
   </component>

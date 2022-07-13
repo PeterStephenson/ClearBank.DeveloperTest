@@ -1,3 +1,10 @@
+# Clear Bank Code test
+This is the submission for the ClearBank code test for Peter Stephenson
+
+In this document I've explained the order of and reason for the choices I made while refactoring the PaymentService.
+
+Note that each of these commits can be viewed in the history, if you like.
+
 ## Commit 1 - Initial
 Check in initial state of test
 
