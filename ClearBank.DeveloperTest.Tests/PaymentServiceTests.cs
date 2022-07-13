@@ -31,6 +31,49 @@ namespace ClearBank.DeveloperTest.Tests
                 .BDDfy();
         }
 
+        [BddfyTheory]
+        [InlineData(AllowedPaymentSchemes.Chaps, PaymentScheme.Bacs)]
+        [InlineData(AllowedPaymentSchemes.FasterPayments, PaymentScheme.Chaps)]
+        [InlineData(AllowedPaymentSchemes.Bacs, PaymentScheme.FasterPayments)]
+        public void NotAllowedPaymentScheme(AllowedPaymentSchemes allowedPaymentSchemes, PaymentScheme paymentScheme)
+        {
+            this.Given(_ => _.AnExistingCustomer("DebtorId", allowedPaymentSchemes, 20, AccountStatus.Live))
+                .When(_ => _.MakingAPayment("CreditorId", "DebtorId", 10.50m, DateTime.UtcNow, paymentScheme))
+                .Then(_ => _.ThePaymentIsNotSuccessful())
+                .BDDfy();
+        }
+
+        [BddfyTheory]
+        [InlineData(PaymentScheme.Bacs)]
+        [InlineData(PaymentScheme.Chaps)]
+        [InlineData(PaymentScheme.FasterPayments)]
+        public void NoAccount(PaymentScheme paymentScheme)
+        {
+            this.When(_ => _.MakingAPayment("CreditorId", "DebtorId", 10.50m, DateTime.UtcNow, paymentScheme))
+                .Then(_ => _.ThePaymentIsNotSuccessful())
+                .BDDfy();
+        }
+
+        [BddfyFact]
+        public void FasterPaymentsWithInsufficientFundsShouldFail()
+        {
+            this.Given(_ => _.AnExistingCustomer("DebtorId", AllowedPaymentSchemes.FasterPayments, 10, AccountStatus.Live))
+                .When(_ => _.MakingAPayment("CreditorId", "DebtorId", 10.50m, DateTime.UtcNow, PaymentScheme.FasterPayments))
+                .Then(_ => _.ThePaymentIsNotSuccessful())
+                .BDDfy();
+        }
+
+        [BddfyTheory]
+        [InlineData(AccountStatus.Disabled)]
+        [InlineData(AccountStatus.InboundPaymentsOnly)]
+        public void NonLiveChapsAccount(AccountStatus accountStatus)
+        {
+            this.Given(_ => _.AnExistingCustomer("DebtorId", AllowedPaymentSchemes.Chaps, 20, accountStatus))
+                .When(_ => _.MakingAPayment("CreditorId", "DebtorId", 10.50m, DateTime.UtcNow, PaymentScheme.Chaps))
+                .Then(_ => _.ThePaymentIsNotSuccessful())
+                .BDDfy();
+        }
+
         private void AnExistingCustomer(string accountNumber, AllowedPaymentSchemes paymentSchemes, decimal balance, AccountStatus status)
         {
             _sut.AccountDataStoreMock.Setup(ds => ds.GetAccount(accountNumber))
@@ -58,6 +101,11 @@ namespace ClearBank.DeveloperTest.Tests
         private async Task ThePaymentIsSuccessful()
         {
             _response.StatusCode.Should().Be(HttpStatusCode.OK, await _response.Content.ReadAsStringAsync());
+        }
+
+        private async Task ThePaymentIsNotSuccessful()
+        {
+            _response.StatusCode.Should().Be(HttpStatusCode.BadRequest, await _response.Content.ReadAsStringAsync());
         }
 
         public void Dispose()
