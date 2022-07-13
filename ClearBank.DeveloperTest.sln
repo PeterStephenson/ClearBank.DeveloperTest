@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClearBank.DeveloperTest", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClearBank.DeveloperTest.Tests", "ClearBank.DeveloperTest.Tests\ClearBank.DeveloperTest.Tests.csproj", "{A3CA1845-E8EC-4B29-8E5C-F1E69CF73F25}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClearBank.DeveloperTest.SampleApi", "ClearBank.DeveloperTest.SampleApi\ClearBank.DeveloperTest.SampleApi.csproj", "{59B8C963-251D-4FC1-92C4-9455EA14BEE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A3CA1845-E8EC-4B29-8E5C-F1E69CF73F25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3CA1845-E8EC-4B29-8E5C-F1E69CF73F25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3CA1845-E8EC-4B29-8E5C-F1E69CF73F25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59B8C963-251D-4FC1-92C4-9455EA14BEE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59B8C963-251D-4FC1-92C4-9455EA14BEE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59B8C963-251D-4FC1-92C4-9455EA14BEE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59B8C963-251D-4FC1-92C4-9455EA14BEE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
