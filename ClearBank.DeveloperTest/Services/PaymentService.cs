@@ -1,4 +1,5 @@
-﻿using ClearBank.DeveloperTest.Data;
+﻿using System;
+using ClearBank.DeveloperTest.Data;
 using ClearBank.DeveloperTest.Types;
 
 namespace ClearBank.DeveloperTest.Services
@@ -14,54 +15,46 @@ namespace ClearBank.DeveloperTest.Services
 
         public MakePaymentResult MakePayment(MakePaymentRequest request)
         {
-            var result = new MakePaymentResult { Success = true };
-
             var account = _accountDataStore.GetAccount(request.DebtorAccountNumber);
             if (account == null)
             {
-                result.Success = false;
-                return result;
+                return CreateFailedResult();
             }
 
-            switch (request.PaymentScheme)
+            var allowedPaymentScheme = GetAllowedPaymentSchemeFromPaymentScheme(request.PaymentScheme);
+            if (!account.AllowedPaymentSchemes.HasFlag(allowedPaymentScheme))
             {
-                case PaymentScheme.Bacs:
-                    if (!account.AllowedPaymentSchemes.HasFlag(AllowedPaymentSchemes.Bacs))
-                    {
-                        result.Success = false;
-                    }
-                    break;
-
-                case PaymentScheme.FasterPayments:
-                    if (!account.AllowedPaymentSchemes.HasFlag(AllowedPaymentSchemes.FasterPayments))
-                    {
-                        result.Success = false;
-                    }
-                    else if (account.Balance < request.Amount)
-                    {
-                        result.Success = false;
-                    }
-                    break;
-
-                case PaymentScheme.Chaps:
-                    if (!account.AllowedPaymentSchemes.HasFlag(AllowedPaymentSchemes.Chaps))
-                    {
-                        result.Success = false;
-                    }
-                    else if (account.Status != AccountStatus.Live)
-                    {
-                        result.Success = false;
-                    }
-                    break;
+                return CreateFailedResult();
             }
-
-            if (result.Success)
+            
+            if(!AccountCanMakePayment(account, request))
             {
-                account.Balance -= request.Amount;
-                _accountDataStore.UpdateAccount(account);
+                return CreateFailedResult();
             }
 
-            return result;
+            account.Balance -= request.Amount;
+            _accountDataStore.UpdateAccount(account);
+
+            return new MakePaymentResult { Success = true };
         }
+
+        private static bool AccountCanMakePayment(Account account, MakePaymentRequest request) =>
+            request.PaymentScheme switch
+            {
+                PaymentScheme.FasterPayments => account.Balance > request.Amount,
+                PaymentScheme.Chaps => account.Status == AccountStatus.Live,
+                _ => true
+            };
+
+        private static AllowedPaymentSchemes GetAllowedPaymentSchemeFromPaymentScheme(PaymentScheme scheme) =>
+            scheme switch
+            {
+                PaymentScheme.FasterPayments => AllowedPaymentSchemes.FasterPayments,
+                PaymentScheme.Bacs => AllowedPaymentSchemes.Bacs,
+                PaymentScheme.Chaps => AllowedPaymentSchemes.Chaps,
+                _ => throw new ArgumentOutOfRangeException(nameof(scheme), scheme, $"AllowedPaymentScheme not found for PaymentScheme {scheme.ToString()}")
+            };
+
+        private static MakePaymentResult CreateFailedResult() => new MakePaymentResult { Success = false };
     }
 }

@@ -9,8 +9,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03960d9f-edf4-4ce4-a194-449af4281080" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ClearBank.DeveloperTest/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClearBank.DeveloperTest.Tests/PaymentServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClearBank.DeveloperTest.Tests/PaymentServiceTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClearBank.DeveloperTest/Services/PaymentService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClearBank.DeveloperTest/Services/PaymentService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +18,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -75,7 +82,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1657725663466</updated>
-      <workItem from="1657725699666" duration="3370000" />
+      <workItem from="1657725699666" duration="6449000" />
     </task>
     <servers />
   </component>
@@ -88,11 +95,22 @@
       <expand>
         <path>
           <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
-          <item name="Total 90% 19/199" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="Total 89% 20/179" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
         </path>
       </expand>
       <select />
     </coverage-tree-state>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
